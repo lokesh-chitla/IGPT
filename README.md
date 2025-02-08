@@ -1,86 +1,90 @@
-# IGPT
-### **IntelliRoute GPT – High-Level Overview & Workflow**  
+# IGPTB: IntelliRoute GPT Bot
 
-#### **1. Purpose & Functionality**  
-- Acts as a **query routing system** that intelligently categorizes user inputs.  
-- Ensures **faster response times** by limiting search space based on category selection.  
-- Provides **context-aware responses** for more relevant answers.  
-- Allows users to **dynamically select multiple categories** to refine their search.  
+## Overview
 
----
+**IGPTB (IntelliRoute GPT Bot)** is a smart query routing system that categorizes user inputs to generate more relevant responses efficiently. The system allows dynamic category selection and features a web search option for broader information retrieval.
 
-### **2. Workflow Breakdown**  
+## Features
 
-#### **Step 1: Category Selection (User Interaction Layer)**  
-- Users select a category from predefined checkboxes (Technology, Cricket, Academic, etc.).  
-- The system dynamically updates and displays the **selected category label** only after a selection is made.  
-- Multiple categories can be selected simultaneously.  
+- **Smart Query Routing**: Intelligently categorizes user queries for better responses.
+- **Enhanced Response Efficiency**: Limits search scope based on selected categories for faster results.
+- **Dynamic UI Interaction**: Allows users to select multiple categories with real-time UI updates.
+- **Web Search & Custom Queries**: Enables an additional "Web Search" option for expanded information access.
 
-#### **Step 2: Input Processing (Query Recognition Layer)**  
-- Users type a query into the input box.  
-- The system detects the selected category/categories.  
-- If multiple categories are selected, the system routes the query to the **most relevant processing logic**.  
+## Folder Structure
 
-#### **Step 3: Response Handling (Output Processing Layer)**  
-- Based on the category:  
-  - If it's a known category (e.g., Technology, Cricket), the system formats a structured response.  
-  - If "Web Search" is selected, it simulates a search request.  
-  - If "Others / No-Idea" is selected, the system **delays response generation** to mimic deeper processing.  
-- The processed answer is displayed in the output box.  
+```
+/project-root
+│── index.html         # Main HTML structure
+│── /styles
+│   ├── styles.css     # CSS file for styling
+│── /scripts
+│   ├── script.js      # JavaScript file for functionality
+│── /images
+│   ├── IGPTB.jpg      # Logo image
+```
 
----
+## Workflow Breakdown
 
-### **3. Algorithm (High-Level Pseudocode)**  
+### Step 1: Category Selection (User Interaction Layer)
+- Users select categories from predefined options (e.g., General Knowledge, Science & Technology, Business & Finance, Web Search, Others).
+- UI dynamically updates selected categories with real-time feedback.
+- Selected categories are highlighted in yellow.
+
+### Step 2: Query Processing (Input Recognition Layer)
+- Users enter a query in the input field.
+- The system determines the selected categories.
+- If no category is selected, users are prompted to choose one.
+- Queries with multiple categories are routed accordingly.
+
+### Step 3: Response Handling (Output Generation Layer)
+- Structured responses are generated based on the selected category.
+- "Web Search" simulates external search behavior.
+- "Others" category introduces a delay for deeper processing.
+
+## Algorithm (High-Level Pseudocode)
 
 ```plaintext
-FUNCTION selectCategory(category):
-    Retrieve all checkboxes
-    Store checked categories in a list
-    IF at least one category is selected:
-        Display "Selected Query Category"
+FUNCTION toggleCategory(category):
+    IF category is selected:
+        Remove category from the list
+        Update UI to remove highlight
     ELSE:
-        Hide category title
+        Add category to the list
+        Highlight selected category
+    Update displayed "Selected Categories"
 
 FUNCTION processUserQuery():
     Retrieve user input
-    Determine selected category/categories
-    IF category is "Technology":
-        Generate technology-specific response
-    ELSE IF category is "Cricket":
-        Generate cricket-related response
-    ELSE IF category is "Web Search":
-        Simulate search engine query
-    ELSE IF category is "Others / No-Idea":
-        Display "Processing query... This may take time"
-        WAIT 3 seconds
-        Display "Sorry, I have no idea about this topic"
-    Display the final response
+    Determine selected categories
+    IF no category is selected:
+        Prompt user to select one
+    ELSE:
+        Route query to the relevant processing logic
+        Display generated response
 ```
 
----
+## Future Enhancements
 
-### **4. Enhancements & Future Improvements**  
+### AI-Powered Categorization
+- Implement **Natural Language Processing (NLP)** to automatically detect the most relevant category.
+- Use machine learning to suggest categories based on past queries.
 
-- **AI-Powered Categorization**  
-  - Implement **Natural Language Processing (NLP)** to **auto-detect the best category** instead of requiring manual selection.  
-  - Train a model to suggest **category-based routing** based on past user queries.  
+### Personalized Query Optimization
+- Introduce a **query history feature** to remember frequently selected categories.
+- Provide **smart recommendations** based on user interactions.
 
-- **Adaptive Query Optimization**  
-  - Introduce a **query history feature** to remember frequently selected categories.  
-  - Suggest categories dynamically based on past interactions.  
+### API & External Data Integration
+- Implement **real-time search APIs** for Web Search queries.
+- Integrate with **Wikipedia, Google Search API, and other sources** for comprehensive responses.
 
-- **API & External Data Integration**  
-  - Fetch real-time results via APIs for Web Search-based queries.  
-  - Integrate knowledge bases (e.g., Wikipedia, Google Search API) for advanced query resolution.  
+### Multi-Category Query Processing
+- Enable **multi-category response generation** for hybrid queries.
+- Example: "Latest AI trends in Business" → Process under **Technology & Business**.
 
-- **Multi-Level Query Processing**  
-  - If a **query belongs to multiple categories**, split the response accordingly.  
-  - Example: "Latest AI trends in Cricket" → Process under both **Technology & Cricket** categories.  
+## Summary
+- **IGPTB** intelligently routes queries based on selected categories.
+- A **dynamic UI** provides real-time category selection updates.
+- **Fast and relevant responses** are generated using category-based routing.
+- Future upgrades include **AI categorization, NLP, and API integrations** for improved functionality.
 
----
-
-### **5. Summary**  
-- **IntelliRoute GPT** structures queries into **categorized flows** for faster, more relevant responses.  
-- It **dynamically updates UI elements** to reflect user selections.  
-- The system follows an **intelligent query-routing algorithm** for efficient response generation.  
-- **Future upgrades** can include **NLP, AI categorization, and API integrations** for a more powerful experience.  
