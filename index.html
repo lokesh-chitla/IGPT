@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IGPTB: IntelliRoute GPT Bot</title>
+  <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body>
+
+  <!-- Header (Logo & Title in One Row) -->
+  <div class="header">
+    <img src="images/IGPTB.jpg" alt="Home" class="logo" onclick="goToHome()">
+    <div class="bot-title">IGPTB: IntelliRoute GPT Bot</div>
+  </div>
+
+  <!-- Main Layout -->
+  <div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-title">Select Query Category</div>
+      <button onclick="toggleCategory(this, 'General Knowledge')">General Knowledge</button>
+      <button onclick="toggleCategory(this, 'Science & Technology')">Science & Technology</button>
+      <button onclick="toggleCategory(this, 'Education & Learning')">Education & Learning</button>
+      <button onclick="toggleCategory(this, 'Entertainment & Arts')">Entertainment & Arts</button>
+      <button onclick="toggleCategory(this, 'Business & Finance')">Business & Finance</button>
+      <button onclick="toggleCategory(this, 'Web Search')">Web Search</button>
+      <button onclick="toggleCategory(this, 'Others')">Others</button>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <div class="category-title" id="category-title">Selected Categories: <span id="selected-text"></span></div>
+      <div class="input-box">
+        <input type="text" id="user-input" placeholder="Ask a question..." />
+      </div>
+      <div class="output-box" id="output-box">
+        <p>Output will be shown here.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="scripts/script.js"></script>
+</body>
+</html>
