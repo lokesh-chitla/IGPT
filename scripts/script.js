@@ -12,29 +12,45 @@ function toggleCategory(button, category) {
     selectedCategories.push(category);
     button.classList.add("selected");
   }
-
   updateCategoryTitle();
 }
 
 function updateCategoryTitle() {
   const selectedText = document.getElementById("selected-text");
-
-  if (selectedCategories.length > 0) {
-    selectedText.innerHTML = selectedCategories.map(cat => `<span class="highlight">${cat}</span>`).join(", ");
-  } else {
-    selectedText.innerHTML = "None";
-  }
+  selectedText.innerHTML = selectedCategories.length > 0 
+    ? selectedCategories.map(cat => `<span class="highlight">${cat}</span>`).join(", ")
+    : "None";
 }
 
-document.getElementById("user-input").addEventListener("input", function () {
-  const outputBox = document.getElementById("output-box");
-  let result = "";
+document.getElementById("user-input").addEventListener("keydown", function (event) {
+  if (event.key === "Enter") {
+    processUserQuery();
+  }
+});
 
-  if (selectedCategories.length > 0) {
-    result = `Answer for (${selectedCategories.join(", ")}) query: ${this.value}`;
-  } else {
-    result = "Please select at least one category.";
+function processUserQuery() {
+  const query = document.getElementById("user-input").value;
+  const outputBox = document.getElementById("output-box");
+
+  if (!query.trim()) {
+    outputBox.innerHTML = "<p>Please enter a query.</p>";
+    return;
   }
 
-  outputBox.innerHTML = `<p>${result}</p>`;
-});
+  outputBox.innerHTML = "<p>Processing...</p>";
+
+  fetch(`http://127.0.0.1:8081/query?q=${encodeURIComponent(query)}`)
+    .then(response => response.json())
+	.then(data => {
+	  let output = data.length 
+		? data.map(item => `
+			<div class="result-item">
+			  <strong>${item.Title.replace("Wikipedia: ", "")}</strong><br>
+			  ${item.Abstract.split(".")[0]}.
+			</div>
+		  `).join("")
+		: "<p>No results found.</p>";
+
+	  outputBox.innerHTML = output;
+	})
+}
